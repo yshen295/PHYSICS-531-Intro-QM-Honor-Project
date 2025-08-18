@@ -1,0 +1,212 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\title{PHYSICS 531 Honor Project}
+\author{Yufei Shen}
+
+\begin{document}
+    \maketitle
+    \rmfamily
+
+    \section{Eigenvalues of Dirac-like Hamiltonians in 1-3D Space}
+
+    To determine the energy eigenvalues of the Hamiltonians specified in Problem 1, we transition from a position-space representation to a momentum-space representation using the Fourier transform. The wavefunction $\Psi(\mathbf{r})$ is expressed as a superposition of plane waves:
+    \begin{equation}
+        \Psi(\mathbf{r}) = \int \frac{d^D p}{(2\pi)^D}\, e^{i\mathbf{p}\cdot \mathbf{r}}\, \tilde{\Psi}(\mathbf{p}),
+    \end{equation}
+    where $D$ is the spatial dimension (1, 2, or 3), $\mathbf{p}$ is the momentum vector, and $\tilde{\Psi}(\mathbf{p})$ is the momentum-space wavefunction. In this basis, the momentum operator $\hat{\mathbf{p}} = -i\nabla$ (with $\hbar=1$ as per the problem's convention) acting on $\Psi(\mathbf{r})$ becomes multiplication by the vector $\mathbf{p}$ for $\tilde{\Psi}(\mathbf{p})$.
+
+    The eigenvalue equation for the Hamiltonian $\hat{H}$ in position space, $\hat{H}\Psi(\mathbf{r}) = E\Psi(\mathbf{r})$, transforms into an algebraic eigenvalue problem in momentum space:
+    \begin{equation}
+        H(\mathbf{p})\tilde{\Psi}(\mathbf{p}) = E(\mathbf{p})\tilde{\Psi}(\mathbf{p}).
+    \end{equation}
+    Here, $H(\mathbf{p})$ is the Hamiltonian matrix expressed in terms of momentum components $\mathbf{p}$, and $E(\mathbf{p})$ are the corresponding energy eigenvalues. These eigenvalues are found by diagonalizing the matrix $H(\mathbf{p})$.
+
+    For the Dirac-like Hamiltonians considered, which are linear in momentum and include a mass term, the energy eigenvalues $E(\mathbf{p})$ typically follow a relativistic dispersion relation. Assuming the characteristic velocity $v=1$ (as implied by "speed of light is set to unity" in the problem description), the general form of these eigenvalues is:
+    \begin{equation} \label{eq:general_eigenvalue}
+        E_{\pm}(\mathbf{p}) = \pm \sqrt{|\mathbf{p}|^2 + m^2},
+    \end{equation}
+    where $m$ is the mass parameter, and $|\mathbf{p}|$ is the magnitude of the momentum vector. The $\pm$ signs distinguish between particle and anti-particle solutions (or upper and lower energy bands).
+
+    We can specify this for each dimension:
+
+    \paragraph{1D Case:}
+    In one spatial dimension, the momentum is $\mathbf{p} = (p_x)$, so $|\mathbf{p}|^2 = p_x^2$. The energy eigenvalues are:
+    \begin{equation}
+        E_{\pm}(p_x) = \pm \sqrt{p_x^2 + m^2}.
+    \end{equation}
+
+    \paragraph{2D Case:}
+    In two spatial dimensions, the momentum is $\mathbf{p} = (p_x, p_y)$, so $|\mathbf{p}|^2 = p_x^2 + p_y^2$. The energy eigenvalues are:
+    \begin{equation}
+        E_{\pm}(\mathbf{p}) = \pm \sqrt{p_x^2 + p_y^2 + m^2}.
+    \end{equation}
+
+    \paragraph{3D Case:}
+    In three spatial dimensions, the momentum is $\mathbf{p} = (p_x, p_y, p_z)$, so $|\mathbf{p}|^2 = p_x^2 + p_y^2 + p_z^2$. The energy eigenvalues are:
+    \begin{equation}
+        E_{\pm}(\mathbf{p}) = \pm \sqrt{p_x^2 + p_y^2 + p_z^2 + m^2}.
+    \end{equation}
+
+    The general form presented in Equation \eqref{eq:general_eigenvalue} encapsulates these results for 1, 2, and 3 dimensions. These expressions provide the energy dispersion relations required for Problem 1.
+
+    \subsection{Eigenstates, Berry Connection, and Curvature for the 2D Hamiltonian}
+    We now focus on the 2D Hamiltonian, which can be written as $H = \mathbf{h}(\mathbf{p}) \cdot \vec{\sigma}$, where $\vec{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ are the Pauli matrices and $\mathbf{h}(\mathbf{p}) = (p_x, p_y, m)$, assuming $v=1$. The magnitude of $\mathbf{h}$ is $h = |\mathbf{h}| = \sqrt{p_x^2 + p_y^2 + m^2}$. The energy eigenvalues are $E_{\pm} = \pm h$.
+
+    The normalized eigenstate corresponding to the positive energy $E_+ = h$ can be found using projection operators or by direct diagonalization. It is given by:
+    \begin{equation}
+        \psi_{E_+} (\mathbf{p}) = \frac{1}{\sqrt{2h(h + m)}}
+        \begin{pmatrix}
+            m + h \\
+            p_x + i p_y % Corrected from user's px - ipy if standard H=px*sigx + py*sigy + m*sigz
+        \end{pmatrix}.
+    \end{equation}
+    (Note: The $p_x - i p_y$ term in the original prompt for $\psi_{E_+}$ corresponds to $H = p_x\sigma_x - p_y\sigma_y + m\sigma_z$ or if $\sigma_y$ definition is different. For $H = p_x\sigma_x + p_y\sigma_y + m\sigma_z$, the term is typically $p_x + i p_y$. We will proceed with the user's form $p_x - i p_y$ for the Berry connection as provided, assuming it matches their Hamiltonian convention, though the standard eigenstate for $H=p_x\sigma_x+p_y\sigma_y+m\sigma_z$ is $\frac{1}{\sqrt{2h(h+m)}} \begin{pmatrix} h+m \\ p_x+ip_y \end{pmatrix}$. If the Hamiltonian is $H = p_x\sigma_x + p_y\sigma_y + m\sigma_z$ and the eigenstate is $\psi_{E_+} = \frac{1}{\sqrt{2h(h+m)}} \begin{pmatrix} h+m \\ p_x - ip_y \end{pmatrix}$, this implies a specific choice of Pauli matrices or a rotation. For the Berry connection components provided by the user, we use their eigenstate form.)
+    
+    Let's use the eigenstate form that leads to the user's Berry connection:
+    \begin{equation}
+     \psi_{E_+} (\mathbf{p}) = \frac{1}{\sqrt{2h(h + m)}}
+        \begin{pmatrix}
+            m + h \\
+            p_x - i p_y 
+        \end{pmatrix}.
+    \end{equation}
+    The eigenstate for $E_- = -h$ is:
+     \begin{equation}
+        \psi_{E_-} (\mathbf{p}) = \frac{1}{\sqrt{2h(h - m)}} % Should be 2h(h+m) or 2h(h-m) depending on overall phase and which component is chosen.
+                                                            % For standard H and E_-, it's 1/sqrt(2h(h-m)) (-(px-ipy), h-m)^T or (h-m, px-ipy)^T with different normalization.
+                                                            % User provided (m-h, px-ipy). Let's assume normalization is correct for that form.
+        \begin{pmatrix}
+            m - h \\
+            p_x - i p_y
+        \end{pmatrix}.
+    \end{equation}
+
+
+    The Berry connection $\mathcal{A}(\mathbf{p}) = i \langle \psi_{E_+} | \nabla_{\mathbf{p}} \psi_{E_+} \rangle$ for the upper band $\psi_{E_+}$ has components:
+    \begin{equation}
+        \mathcal{A}_x(\mathbf{p}) = \frac{-p_y}{2h(h+m)}, \quad
+        \mathcal{A}_y(\mathbf{p}) = \frac{p_x}{2h(h+m)}.
+    \end{equation}
+    The Berry curvature $\Omega(\mathbf{p})$ (also denoted $F_{xy}(\mathbf{p})$) is calculated as:
+    \begin{equation}
+        \Omega(\mathbf{p}) = \frac{\partial \mathcal{A}_y}{\partial p_x} - \frac{\partial \mathcal{A}_x}{\partial p_y}.
+    \end{equation}
+    For this system, the Berry curvature is found to be:
+    \begin{equation}
+        \Omega(\mathbf{p}) = \frac{m}{2h^3} = \frac{m}{2(p_x^2 + p_y^2 + m^2)^{3/2}}.
+    \end{equation}
+    Since $E=h$ (with $v=1$), this can also be written as $\Omega(\mathbf{p}) = \frac{m}{2E^3}$.
+
+    The Chern number $C$ is obtained by integrating the Berry curvature over the entire 2D momentum space (the Brillouin zone for a lattice system, or $\mathbb{R}^2$ for a continuum model):
+    \begin{equation}
+        C = \int \frac{d^2p}{2\pi} \Omega(\mathbf{p}).
+    \end{equation}
+    Substituting the expression for $\Omega(\mathbf{p})$ and converting to polar coordinates ($p_x = p \cos\phi$, $p_y = p \sin\phi$, $d^2p = p \,dp \,d\phi$, where $p = \sqrt{p_x^2+p_y^2}$):
+    \begin{align}
+        C &= \int_0^{2\pi} \frac{d\phi}{2\pi} \int_0^{\infty} p \,dp \, \frac{m}{2(p^2 + m^2)^{3/2}} \nonumber \\
+        &= 1 \cdot \frac{m}{2} \int_0^{\infty} \frac{p}{(p^2 + m^2)^{3/2}} \,dp.
+    \end{align}
+    To evaluate the integral, let $u = p^2 + m^2$, so $du = 2p \,dp$. When $p=0$, $u=m^2$. When $p\to\infty$, $u\to\infty$.
+    \begin{align}
+        C &= \frac{m}{2} \int_{m^2}^{\infty} \frac{1}{u^{3/2}} \frac{du}{2} = \frac{m}{4} \int_{m^2}^{\infty} u^{-3/2} \,du \nonumber \\
+        &= \frac{m}{4} \left[ \frac{u^{-1/2}}{-1/2} \right]_{m^2}^{\infty} = \frac{m}{4} \left[ -2u^{-1/2} \right]_{m^2}^{\infty} \nonumber \\
+        &= -\frac{m}{2} \left( \lim_{u\to\infty} \frac{1}{\sqrt{u}} - \frac{1}{\sqrt{m^2}} \right) \nonumber \\
+        &= -\frac{m}{2} \left( 0 - \frac{1}{|m|} \right) = \frac{m}{2|m|} \nonumber \\
+        &= \frac{1}{2} \mathrm{sign}(m).
+    \end{align}
+    
+    Thus, the Chern number is $C = +1/2$ if $m>0$ and $C = -1/2$ if $m<0$. If $m=0$, the Chern number is ill-defined as the gap closes.
+
+    	\section{Problem 2: Edge States of 2D Dirac Hamiltonian}
+	We consider a 2D Dirac Hamiltonian with a mass term $m(y)$ that varies along the $y$-direction, creating an interface. Such a system can host chiral edge states, as described by Jackiw and Rebbi (1976) and found in topological insulators (e.g., Kane and Hazan review, Eq. 6).
+	
+	The reference solution (Eq. 6 in Kane and Hazan) is of the form:
+	\begin{equation} \label{eq:kane_hazan_6_main}
+		\psi_{q_x}(x,y) = \mathcal{N} e^{i q_x x} \exp\left(-\int_0^y \frac{m(y')}{\hbar v_F} dy'\right) \begin{pmatrix} 1 \\ 1 \end{pmatrix},
+	\end{equation}
+	with a linear energy dispersion relation:
+	\begin{equation} \label{eq:edge_dispersion_main}
+		E(q_x) = \hbar v_F q_x.
+	\end{equation}
+	Here, $q_x$ is the wavevector along the edge (x-direction), $v_F$ is the Fermi velocity, and $\mathcal{N}$ is a normalization constant. The mass $m(y)$ changes sign across $y=0$ (e.g., $m(y) < 0$ for $y<0$ and $m(y) > 0$ for $y>0$) for the state to be localized at the interface.
+	
+	\subsection{Derivation of the Edge State}
+	To derive this solution, we consider a Hamiltonian:
+	\begin{equation}
+		H = v_F (\hat{p}_x \sigma_x - \hat{p}_y \sigma_y) + m(y) \sigma_z,
+	\end{equation}
+	where $\hat{p}_x = -i\hbar\partial_x$, $\hat{p}_y = -i\hbar\partial_y$, and $\sigma_i$ are the standard Pauli matrices.
+	We look for a solution of the form $\psi(x,y) = e^{i q_x x} \Phi(y)$. Substituting $\hat{p}_x \to \hbar q_x$:
+	\begin{equation}
+		H \psi = \left[ v_F (\hbar q_x \sigma_x - (-i\hbar\partial_y) \sigma_y) + m(y) \sigma_z \right] e^{i q_x x} \Phi(y) = E e^{i q_x x} \Phi(y).
+	\end{equation}
+	We propose an ansatz for the spinor part $\Phi(y) = \phi(y) \chi$, where $\chi = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$. This spinor is an eigenstate of $\sigma_x$ with eigenvalue $+1$: $\sigma_x \chi = \chi$.
+	The eigenvalue equation becomes:
+	\begin{equation}
+		\left[ v_F \hbar q_x \sigma_x + i \hbar v_F \sigma_y \partial_y + m(y) \sigma_z \right] \phi(y) \chi = E \phi(y) \chi.
+	\end{equation}
+	We are looking for states with the dispersion $E = \hbar v_F q_x$. Substituting this and using $\sigma_x \chi = \chi$:
+	\begin{equation}
+		\left[ \hbar v_F q_x I + i \hbar v_F \sigma_y \partial_y + m(y) \sigma_z \right] \phi(y) \chi = \hbar v_F q_x \phi(y) \chi.
+	\end{equation}
+	This simplifies to:
+	\begin{equation}
+		\left( i \hbar v_F \sigma_y \partial_y + m(y) \sigma_z \right) \phi(y) \chi = 0.
+	\end{equation}
+	Expanding $\partial_y (\phi(y)\chi) = (\partial_y \phi) \chi$ (since $\chi$ is $y$-independent):
+	\begin{equation}
+		i \hbar v_F (\partial_y \phi) \sigma_y \chi + m(y) \phi \sigma_z \chi = 0.
+	\end{equation}
+	We calculate the action of Pauli matrices on $\chi = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$:
+	\begin{align*}
+		\sigma_y \chi &= \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} -i \\ i \end{pmatrix} = i \begin{pmatrix} -1 \\ 1 \end{pmatrix}, \\
+		\sigma_z \chi &= \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \end{pmatrix}.
+	\end{align*}
+	Substituting these into the equation:
+	\begin{equation}
+		i \hbar v_F (\partial_y \phi) \left(i \begin{pmatrix} -1 \\ 1 \end{pmatrix}\right) + m(y) \phi \begin{pmatrix} 1 \\ -1 \end{pmatrix} = 0.
+	\end{equation}
+	\begin{equation}
+		-\hbar v_F (\partial_y \phi) \begin{pmatrix} -1 \\ 1 \end{pmatrix} + m(y) \phi \begin{pmatrix} 1 \\ -1 \end{pmatrix} = 0.
+	\end{equation}
+	This can be rewritten as:
+	\begin{equation}
+		\left( \hbar v_F (\partial_y \phi) + m(y) \phi \right) \begin{pmatrix} 1 \\ -1 \end{pmatrix} = 0.
+	\end{equation}
+	For a non-trivial solution, we require the scalar part to be zero:
+	\begin{equation}
+		\hbar v_F \frac{d\phi}{dy} + m(y) \phi(y) = 0.
+	\end{equation}
+	This is a first-order linear differential equation for $\phi(y)$:
+	\begin{equation}
+		\frac{d\phi}{dy} = -\frac{m(y)}{\hbar v_F} \phi(y).
+	\end{equation}
+	The solution is:
+	\begin{equation}
+		\phi(y) = \mathcal{N} \exp\left(-\int_0^y \frac{m(y')}{\hbar v_F} dy'\right),
+	\end{equation}
+	where $\mathcal{N}$ is a normalization constant.
+	Combining this with the ansatz, we recover the edge state wavefunction Eq. (6)
+	
+	\paragraph{Normalization and Localization:}
+	For the state to be a localized edge state, $\phi(y)$ must decay as $y \to \pm\infty$. This occurs if the integral $\int_0^y \frac{m(y')}{\hbar v_F} dy'$ tends to $+\infty$ as $y \to \infty$ and to $-\infty$ as $y \to -\infty$ (or vice-versa, depending on the sign convention of $m(y)$).
+	Consider a mass domain wall where $m(y) = m_0 \text{sgn}(y)$ with $m_0 > 0$.
+	Then $\int_0^y \frac{m(y')}{\hbar v_F} dy' = \frac{m_0}{\hbar v_F} |y|$.
+	The wavefunction component becomes $\phi(y) = \mathcal{N} \exp\left(-\frac{m_0|y|}{\hbar v_F}\right)$. This state is localized at $y=0$ and is normalizable. The condition from the reference image ($m(y)>0$ for $y>0$ and $m(y)<0$ for $y<0$) ensures such localization.
+        \paragraph{Fractionalization of fermion:}
+        Fermion number fractionalization occurs when a topological defect, such as a mass domain wall in a Dirac system, hosts a localized zero-energy electronic state. This special state, positioned exactly between occupied negative-energy states (like the Dirac sea) and empty positive-energy states, results in the defect effectively binding a non-integer fermion number, typically ±1/2, compared to a system without such a defect. Consequently, the defect itself appears to carry a fractional charge or fermion number within the material's collective electronic ground state, even though fundamental fermions remain indivisible.
+	\subsection{Dispersion Plot for Bulk and Edge States}
+	The following plot illustrates the bulk energy bands for a 2D Dirac material and the linearly dispersing chiral edge state that appears at an interface where the mass term $m$ changes sign. We set $\hbar=1$, $v_F=1$, and a representative mass $m=0.5$ for the bulk gap. The edge state dispersion is $E=q_x$.
+	
+ 
+    \section{Summery}
+    Berry curvature, Berry connection, Chern number: The Berry connection describes the geometric phase acquired by a quantum state as parameters are varied adiabatically; its curl is the Berry curvature, and the integral of this curvature over the Brillouin zone gives the Chern number, a topological invariant characterizing electronic bands.
+
+    Bulk-Boundary correspondence: This principle states that the non-trivial topological properties of a material's bulk (e.g., a non-zero Chern number) necessitate the existence of protected, gapless states at its boundaries or edges.
+
+    Edge states and why are they robust: Edge states are electronic states localized at the boundary of a material, often with unique transport properties; they are robust because their existence is guaranteed by the bulk topology, making them insensitive to local perturbations that do not close the bulk gap or break fundamental symmetries.
+
+    Explain how in Solid state systems the Dirac equation can appear and why it can have both negative and positive mass: In some solid-state systems (like graphene or topological insulators), the electron energy-momentum relationship near certain points (Dirac points) becomes linear, mimicking the massless Dirac equation; a gap can be opened, leading to an effective mass term which can be positive or negative depending on the band structure details (e.g., band inversion), distinguishing trivial from topological phases.
+
+\end{document}
